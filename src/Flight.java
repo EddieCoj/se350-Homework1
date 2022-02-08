@@ -13,7 +13,7 @@ public class Flight {
 	public Flight(Airline line, Airport port1, Airport port2)
 			throws NullParameterException, BadParameterException {
 		setAirline(line);
-		setOrigine(port1);
+		setOrigin(port1);
 		setDestination(port2);
 		setDepartureTime();
 		setFlightNumber();
@@ -48,7 +48,7 @@ public class Flight {
 		this.airline = line;
 	}
 
-	private void setOrigine(Airport port1) 
+	private void setOrigin(Airport port1) 
 			throws NullParameterException {
 		if (port1 == null) {
 			throw new NullParameterException("Null value passed to setOrigine");	
