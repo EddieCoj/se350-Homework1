@@ -20,13 +20,11 @@ public class Airline {
 		if (aName.length() <= 0 || aName.length() > 8) {
             throw new BadParameterException("Bad value passed to setAirlineName: " + aName);
 		}
-		airlineName = aName;
+		this.airlineName = aName;
 	}
 	
 	public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-20s %s%n", "Airline:", getAirlineName()));
-        return sb.toString();
+        return "Airline{" + "name='" + getAirlineName() + '\'' + '}';
     }
 
 	@Override
@@ -35,20 +33,11 @@ public class Airline {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Airline other = (Airline) obj;
-		if (airlineName == null) {
-			if (other.airlineName != null)
-				return false;
-		} else if (!airlineName.equals(other.airlineName))
-			return false;
-		return true;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Airline airline = (Airline) o;
+        return Objects.equals(airlineName, airline.airlineName);
 	}	
 }
 

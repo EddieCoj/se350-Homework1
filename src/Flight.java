@@ -5,35 +5,35 @@ import java.util.UUID;
 public class Flight {
 	
 	private Airline airline;
-	private Airport origine;
+	private Airport origin;
 	private Airport destination;
-	private Date depatureTime;
+	private Date departureTime;
 	private String flightNumber;
 
-	public Flight(Airline line, Airport port1, Airport port2, Date time)
+	public Flight(Airline line, Airport port1, Airport port2)
 			throws NullParameterException, BadParameterException {
 		setAirline(line);
 		setOrigine(port1);
 		setDestination(port2);
-		setDepartureTime(time);
+		setDepartureTime();
 		setFlightNumber();
 		
 	}
 	
-	public Airline getAirline() {
-        return airline;
+	public String getAirline() {
+        return airline.toString();
     }
 	
-	public Airport getOrigine() {
-		return origine;
+	public String getOrigin() {
+		return origin.toString();
 	}
 	
-	public Airport getDestination() {
-		return destination;
+	public String getDestination() {
+		return destination.toString();
 	}
 	
-	public Date getDate() {
-		return depatureTime;
+	public String getDate() {
+		return departureTime.toString();
 	}
 	
 	public String getFlightNumber() {
@@ -45,7 +45,7 @@ public class Flight {
 		if (line == null) {
             throw new NullParameterException("Null value passed to setAirline");
         }
-		airline = line;
+		this.airline = line;
 	}
 
 	private void setOrigine(Airport port1) 
@@ -53,7 +53,7 @@ public class Flight {
 		if (port1 == null) {
 			throw new NullParameterException("Null value passed to setOrigine");	
 		}
-		origine = port1;
+		this.origin = port1;
 	}
 
 	private void setDestination(Airport port2) 
@@ -61,15 +61,11 @@ public class Flight {
 		if (port2 == null) {
 			throw new NullParameterException("Null value passed to setDestination");	
 		}
-		destination = port2;
+		this.destination = port2;
 	}
 
-	private void setDepartureTime(Date time) 
-			throws NullParameterException {
-		if (time == null) {
-			throw new NullParameterException("Null value passed to setDepartureTime");	
-		}
-		depatureTime = time;
+	private void setDepartureTime() {
+		this.departureTime = new Date(2022, 05, 05, 13, 30);
 	}
 
 	private void setFlightNumber() {
@@ -78,14 +74,13 @@ public class Flight {
 	}
 	
 	public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-20s %s%n", "Airline:", getAirline()));
-        sb.append(String.format("%-20s %s%n", "Origine:", getOrigine()));
-        sb.append(String.format("%-20s %s%n", "Destination:", getDestination()));
-        sb.append(String.format("%-20s %s%n", "Date:", getDate()));
-        sb.append(String.format("%-20s %s%n", "FlightNumber:", getFlightNumber()));
-        
-        return sb.toString();
+		return "Flight{" +
+                "airline=" + getAirline() +
+                ", origin=" + getOrigin() +
+                ", destination=" + getDestination() +
+                ", flightNumber=" + getFlightNumber() +
+                ", departureTime=" + getDate() +
+                '}';
     }
 
 	@Override
@@ -93,9 +88,9 @@ public class Flight {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((airline == null) ? 0 : airline.hashCode());
-		result = prime * result + ((depatureTime == null) ? 0 : depatureTime.hashCode());
+		result = prime * result + ((departureTime == null) ? 0 : departureTime.hashCode());
 		result = prime * result + ((destination == null) ? 0 : destination.hashCode());
-		result = prime * result + ((origine == null) ? 0 : origine.hashCode());
+		result = prime * result + ((origin == null) ? 0 : origin.hashCode());
 		return result;
 	}
 
@@ -113,20 +108,20 @@ public class Flight {
 				return false;
 		} else if (!airline.equals(other.airline))
 			return false;
-		if (depatureTime == null) {
-			if (other.depatureTime != null)
+		if (departureTime == null) {
+			if (other.departureTime != null)
 				return false;
-		} else if (!depatureTime.equals(other.depatureTime))
+		} else if (!departureTime.equals(other.departureTime))
 			return false;
 		if (destination == null) {
 			if (other.destination != null)
 				return false;
 		} else if (!destination.equals(other.destination))
 			return false;
-		if (origine == null) {
-			if (other.origine != null)
+		if (origin == null) {
+			if (other.origin != null)
 				return false;
-		} else if (!origine.equals(other.origine))
+		} else if (!origin.equals(other.origin))
 			return false;
 		return true;
 	}
