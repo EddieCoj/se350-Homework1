@@ -3,10 +3,23 @@ public class FlightFactory {
     private FlightFactory() {
     }
 
-	public static Flight createFlight(String type, Airline line, Airport port1, Airport port2) throws NullParameterException, BadParameterException {
-		if (type.equals("CommercialFlight"))
-            return new CommercialFlight(line, port2, port2);
-		else return null;
-	}
+    public static Flight createFlight(String type, Airline airline, Airport origin, Airport destination, int cap) {
+        if (type.equals("commercialFlight")) {
+            try {
+                return new CommercialFlight(airline, origin, destination);
+            } catch(NullParameterException | BadParameterException e) {
+                return null;
+            }
+        }
+        
+        else if (type.equals("passengerFlight")) {
+        	try {
+				return new PassengerFlight(airline, origin, destination, cap);
+			} catch (NullParameterException | BadParameterException e) {
+				return null;
+			}
+        }
 
+        else return null;
+    }
 }

@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public final class FlightManager {
 
     private static FlightManager ourInstance;
-    private List<Flight> flights = new ArrayList();
+    private static List<Flight> flights;
 
     public static FlightManager getInstance() throws Exception {
         if (ourInstance == null)
@@ -14,19 +15,19 @@ public final class FlightManager {
     }
 
     private FlightManager() {
+    	flights = new ArrayList<Flight>();
     }
 
-    public void createFlight(String type, Airline line, Airport port1, Airport port2) throws NullParameterException, BadParameterException{
-    	Flight newFlight = FlightFactory.createFlight(type, line, port1, port2);
-    	flights.add(newFlight);
+    public String createFlight(String type, Airline airline, Airport origin, Airport destination, int cap) {
+        Flight flight = FlightFactory.createFlight(type, airline, origin, destination, cap);
+        flights.add(flight);
+        
+        return flight.getFlightNumber();
     }
     
-    public Flight getFlightByNumber(String flightNum) {
-    	for (int i = 0; i < flights.size(); i++) {
-    		if (flights.get(i).getFlightNumber() == flightNum)
-    			return flights.get(i);
-    	}
-		return null;
+    public Optional<Flight> getFlightByFlightNumber(String flightNumber) {
+        return flights.stream()
+                .filter(flt -> flt.getFlightNumber().equals(flightNumber))
+                .findFirst();
     }
-	
 }
