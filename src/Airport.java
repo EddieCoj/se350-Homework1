@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Airport implements Complex{
+public class Airport{
 	
 	private String airportName;
 	

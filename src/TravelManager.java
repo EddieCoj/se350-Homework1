@@ -2,24 +2,22 @@ import java.util.Date;
 import java.util.Optional;
 
 public class TravelManager {
-	
-	public static void main(String[] args) throws Exception {
-		try {
-			Airline airline = new Airline("Spirit");
-            Airport origin = new Airport("ORD");
-            Airport destination = new Airport("DFW");
 
-            //CommercialFlight commercialFlight = new CommercialFlight(airline, origin, destination);
-            String flightNumber = FlightManager.getInstance().createFlight("passengerFlight", airline, origin, destination, 5);
-            Optional<Flight> flight = FlightManager.getInstance().getFlightByFlightNumber(flightNumber);
+    public static void main(String[] args) throws Exception {
 
-            System.out.println(flight.get());
-            
-        } catch (NullParameterException ex) {
-            ex.printStackTrace();
-        } catch (BadParameterException ex) {
-            ex.printStackTrace();
-        }
-		
-	}
+    	 Airline airline = AirlineFactory.getAirline("Spirit");
+         Airport origin = AirportFactory.getAirport("ORD");
+         Airport destination = AirportFactory.getAirport("DFW");
+
+         String flightNumber = FlightManager.getInstance().createFlight("commercialFlight", airline, origin, destination, 0);
+         String flightNumber2 = FlightManager.getInstance().createFlight("passengerFlight", airline, origin, destination, 88);
+
+         Optional<Flight> flight = FlightManager.getInstance().getFlightByFlightNumber(flightNumber);
+         Optional<Flight> flight2 = FlightManager.getInstance().getFlightByFlightNumber(flightNumber2);
+
+         System.out.println(flight.get());
+         System.out.println(flight2.get());
+
+    }
+
 }

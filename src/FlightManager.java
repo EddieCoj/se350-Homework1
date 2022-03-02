@@ -18,7 +18,7 @@ public final class FlightManager {
     	flights = new ArrayList<Flight>();
     }
 
-    public String createFlight(String type, Airline airline, Airport origin, Airport destination, int cap) {
+    public String createFlight(String type, Airline airline, Airport origin, Airport destination, int cap) throws BadParameterException {
         Flight flight = FlightFactory.createFlight(type, airline, origin, destination, cap);
         flights.add(flight);
         

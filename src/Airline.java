@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Airline implements AirService{
+public class Airline{
 	
 	private String airlineName;
 	
